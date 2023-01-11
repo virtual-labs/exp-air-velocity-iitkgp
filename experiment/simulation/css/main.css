@@ -1,1 +1,206 @@
-/* You CSS goes in here */
+/* Lab:exp_6_Establishment of the Relationship between Kata Cooling Power and Air Velocity
+	 File name: main.css
+   Author:Prakriti Dhang
+*/
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+table,th,td{
+    text-align: center;
+    font-size: medium;
+    width: 20%;
+}
+
+.img-container{
+  display: inline-block;
+  position: relative;
+}
+
+
+.timerDisplay{
+  position: relative;
+  width: 40%;
+  background: #feffcd;
+  left: 0%;
+  padding: 0px 0;
+  font-family: 'Roboto mono',monospace;
+  color: #0381bb;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: blue;
+  box-shadow: 0 0 20px rgba(0, 110, 201, 0.25);
+}
+.timerunit{
+  position: relative;
+  width: 40%;
+ 
+  left: 0%;
+  padding: 0px 0;
+  font-family: 'Roboto mono',monospace;
+  color: #0381bb;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 5px;
+ 
+}
+
+
+.buttons{
+  width: 50%;
+  margin: 40px auto 0 auto;
+  
+}
+.poscol{
+  width: 100%;
+  min-width: 23px;
+  min-height: 1px;
+  }
+  
+  .poscol img{
+    max-width: 100%;
+    height: auto;
+  }
+  
+  #ductset{
+    position: relative;
+    top:10%;
+    left:28%; 
+    width: 90%;
+    height: 30%;
+    
+    
+}
+
+  #psychro{
+    position: absolute;
+    top:2%;
+    left: -5%;
+    width: 35%;
+}
+
+#ring{
+  position: absolute;
+  top:-2%;
+  left: 10%;
+  width:6%;
+}
+#readw1{
+  position: absolute;
+  top: 87.5%;
+  left: 74%;
+  width:5%;
+  animation: rotation 5s linear 0s infinite;
+  animation-play-state: paused;
+}
+#readw2{
+  position: absolute;
+  top: 85%;
+  left: 72%;
+  width: 10%;
+  animation: rotation 1s linear 0s infinite;
+  animation-play-state: paused;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(358deg)
+  }
+}
+
+#myCanvas{
+    position: absolute;
+    top:50%;
+    left:75.5%; 
+    width:1.2%;
+    height: 33%;
+    display: block;
+    }
+
+    #myCanvas1{
+      position: absolute;
+      top:50%;
+    left:75.5%; 
+    width:1.2%;
+    height: 33%;
+      display: none;
+      }
+
+#myCanvas2{
+    position: absolute;
+    top: 59%;
+    left:4%;
+    width:1%;
+    height: 40%;
+        
+      }
+
+
+
+     /*  Flow control device  1 */
+#contldevice1 {
+    position: absolute;
+    left: 28.7%;
+    top: 100%;
+    width:15.2%;
+    animation: tplate1 10s linear;
+   /* margin-left: 50% !important;*/
+  }
+
+ /*  Flow control device 2 */
+#contldevice2 {
+    position: absolute;
+    left: 28.7%;
+    top: 100%;
+    width:15.3%;
+   
+  }
+  /*  Flow control device 3 */
+#contldevice3 {
+    position: absolute;
+    left: 28.7%;
+    top: 100%;
+    width:15.3%;
+  }
+
+  @media print {
+    body {-webkit-print-color-adjust: exact !important;
+       
+        
+    }
+    }
+    @page {
+        margin: 1in; 
+      }
+      
+    @print {
+       @page :footer {
+          display: none;
+          
+           
+       }
+     
+       @page :header {
+          display: none;
+          
+       }
+   }
+   @media print {
+    #myPlot {
+      padding-right: 1cm;
+    }
+  }
+  
