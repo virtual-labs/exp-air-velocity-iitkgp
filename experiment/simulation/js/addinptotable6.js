@@ -1,4 +1,4 @@
-/* Lab:exp_6_Establishment of the Relationship between Kata Cooling Power and Air Velocity
+/* Lab:exp_Establishment of the Relationship between Kata Cooling Power and Air Velocity
 	 File name: addinptotable6.js
    Author:Prakriti Dhang
 */
