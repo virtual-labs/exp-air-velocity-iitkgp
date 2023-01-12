@@ -1,4 +1,5 @@
-/* Lab:exp_6_Establishment of the Relationship between Kata Cooling Power and Air Velocity
+/* Lab:Mine Ventilation
+   Exp: Establishment of the Relationship between Kata Cooling Power and Air Velocity
 	 File name: main.js
    Author:Prakriti Dhang
 */
