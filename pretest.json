@@ -1,0 +1,17 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "The cooling power of any mine air depends mainly on the wet bulb temperature (T<sub>W</sub>) and the air velocity (v).",
+      "answers": {
+        "a": "True",
+        "b": "False"
+        
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    }
+    
+    
+  ]
+}

@@ -1,0 +1,426 @@
+<!-- Lab:Mine Ventilation
+Exp: Establishment of the Relationship between Kata Cooling Power and Air Velocity
+	 File name: index.html
+   Author:Prakriti Dhang-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Add CSS at the head of HTML file -->
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+	<link rel="stylesheet"  href="./css/main.css">
+	<link rel="stylesheet" href="./css/katex.min.css" >
+	
+	<script src="./js/jquery.slim.min.js"></script>
+	<script src="./js/bootstrap.bundle.min.js"></script>
+	<script src="./js/popper.min.js"></script>
+	<script src="./js/modernizr-1.5.min.js"></script>
+	
+	<!--script src="../js/jquery-1.7.1.min.js"></script-->
+	
+	<!--script src="../js/Chart.js"></script-->
+	<script src="./js/Plotly.js"></script> <!--https://cdn.plot.ly/plotly-latest.min.js-->
+	<script src="./js/addinptotable6.js"></script>
+	<script src="./js/checkob6.js"></script>
+	<script src="./js/graphplotly6.js"></script>
+	<script src="./js/main.js"></script>
+	<script src="./js/katex.min.js" ></script>
+	<script defer src="./js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+	<style>
+	  footer {
+	text-align: center;
+	padding: 3px;
+	background-color: DarkSalmon;
+	color: white;
+   }
+   /*.img-magnifier-container{
+	 position: relative;
+   }
+   .img-magnifier-glass {
+	 position: absolute;
+	 border: 1px solid #000;
+	 border-radius:70%;
+	 z-index: 8;
+	 cursor: none;
+	 
+	 /*Set the size of the magnifier glass:*/
+	 /*width: 70px;
+	 height:70px;
+   }*/
+   
+  
+  </style>
+  
+  </head>
+  <body class="d-flex flex-column min-vh-100"  >
+	<header id="header">
+	  <div class="container-fluid">
+		  <!--img src="./images/logo.jpg" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 rounded img-fluid img-resposive" alt="logo" -->
+	  </div>
+	</header>
+	  
+  <div class="container-fluid">
+	  <div class=" d-flex justify-content-center p-2  text-white">
+		  <!--h4 style="color:#1bf514">Establishment of the Relationship between Kata Cooling Power and Air Velocity</h4-->
+	  </div>
+	 
+  </div>
+  
+	<div>
+  <div class="container-fluid">
+	<div class="row">
+	  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 poscol">
+	  <div class="card border-primary rounded" style="height: 550px;">
+		  <div class="card-body" >
+			<h4 class="card-title">Machine set up</h4>
+		   <div class="img-container">
+			<img id ="ductset" src="./images/duct.png" class="img-fluid" alt="ductset" data-toggle="tooltip" data-placement="top"  title="Duct Setup">
+			<img id ="psychro" src="./images/pyschrometer.png" class=" img-fluid " alt="psychro" data-toggle="tooltip" data-placement="left"  title="Assaman Psychrometer"/>
+		   <img id ="ring" src="./images/ring.png" class="img-fluid" alt="ring" >
+		 
+		  <img id ="contldevice1" src="./images/plate1_0.5.png" onclick="moveplate1();" class=" img-fluid" alt="Flow control device 1" style="display: none;" data-toggle="tooltip" data-placement="left"  title="Flow Control Device 1">
+			<img id ="contldevice2" src="./images/plate2_0.52.png" onclick="moveplate2();" class=" img-resposive" alt="Flow control device 2" style="display: none;" data-toggle="tooltip" data-placement="left"  title="Flow Control Device 2">
+			<img id ="contldevice3" src="./images/plate3_0.55.png" onclick="moveplate3();" class=" img-resposive" alt="Flow control device 3" style="display: none;" data-toggle="tooltip" data-placement="left"  title="Flow Control Device 3">
+		 <img id ="readw2" src="./images/read2.png" class=" img-fluid " alt="read2" >
+			<img id ="readw1" src="./images/read1.png" class=" img-fluid " alt="read1">
+  
+  
+			<canvas id="myCanvas2" width="2" height="135" style="border:0px solid #707070;"></canvas>
+			 <canvas id="myCanvas" width="3" height="130" style="border:1px solid #ff0101;"></canvas>
+			<canvas id="myCanvas1" width="3" height="130" style="border:1px solid #ff0101;"></canvas>
+			
+		  </div>
+	   
+			
+  
+			<!--- SVG -->
+  
+  
+  <!--- SVG-->
+			
+			
+		   
+			
+		 
+		 <!--div class="img-magnifier-glass"></div-->
+		   
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			
+			
+			 <div id="graphd" class="card border-primary rounded" style="display:none;">
+			   <div class="card-body"  >
+				 <div class="card-title" style="text-align: center; font-weight: bold; font-size: large;">Graph Plot</div>
+				 <button type="button" class="btn btn-primary  col-3 col-sm-4 col-xs-3 col-lg-3" onclick="showplot();">Plot Graph</button>
+				 <button type="button" class="btn btn-warning  col-4 col-sm-4 col-xs-3 col-lg-3" onclick="showbestfitg();">Best Fit Graph</button>
+				 <button type="button" class="btn btn-success  float-right col-3 col-sm-3 col-xs-3 col-lg-3" onclick="window.print()">Print</button>
+  
+				 <!--canvas id="myChart" class="col-xs-12 col-sm-12 col-md-12 col-lg-12"></canvas-->
+				 <div id="myPlot"  style="height:400px;"></div>
+			   </div>
+			 </div>
+		  </div>
+		</div>
+	  </div>
+	  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
+		<div class="card border-primary rounded">
+		  <div class="card-body" >
+			<h4 class="card-title">Control Elements</h4>
+			<p class="card-text" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">To start the experiment click the "Start" button</p>
+			  <button type="button" id="yesbtn" class="btn btn-primary col-md-3 col-sm-3 col-xs-3 col-lg-3"  data-toggle="modal" data-target="#rotatephone" >Start</button>
+			  <!--button type="button" id="nobtn" class="btn btn-warning col-md-3 col-sm-3 col-xs-3 col-lg-3" data-toggle="modal" data-target="#cancelexp" >No</button-->
+			  <button type="button" id="btninst" class="btn btn-success float-right col-md-3 col-sm-3 col-xs-3 col-lg-3" data-toggle="collapse" data-target="#instdisp1" disabled>Instruction</button>
+  </div></div>
+			  <div id="instdisp1" class="collapse card border-primary rounded " > <!--style="display: none;"-->
+				<div class="card-body" style="background-color:rgb(220, 253, 209);">
+			  <h4 class="card-title">Instruction</h4>
+			  
+		   <ol type="1">
+		
+			<li> Start the clock. Measure the wet-bulb temperature (TW) by Assman Psychrometer. The level rises above 38°C mark.</li>
+			
+	  <li>The Kata-thermometer is placed in front of the duct. After few seconds,
+		 the alcohol will drop down from 38°C to 35°C. Note the time using stopwatch.</li>
+		 <li>Stop the clock. And note the time.</li>
+	  <li>Air velocity is given by vane anemometer. Click the "Calculate" button to calculate Wet Kata Cooling Power.</li>
+	  <li>After that add the result to the observation table by clicking the button "Add result to observation table".</li>
+	  <li>Repeat the from setp 2 with different flow control devices.</li>   
+     <li>Plot the graph between Kata cooling power and air velocity by click "Plot Graph" and To find the best fit line click " Best Fit Graph".</li>
+  
+	
+		   </ol>
+				  </div>
+				  </div> 
+				  
+			  <div id="stopwatchd" class="card border-primary rounded" style="display: none;" >
+				<div class="card-body" >
+				  
+			<p class="card-text" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Stop Watch</p>
+			<div class="timerDisplay ">
+			  00 : 00 : 00 : 00
+			  </div>
+		  <div class="timerunit ">
+				 hr : min : sec : ms
+				</div>
+			  <!--input  class="form-control col-xs-4 col-md-4 col-sm-4 col-lg-4" id="time" value="00:00:00" readonly-->
+			  <!--p><span id="mins">00</span>:<span id="seconds">00</span>:<span id="tens">00</span></p-->
+			  <div class="btn-group"><button type="button" id="button-start" onclick="startwatch();" class="btn btn-success col-xs-6 col-sm-6 col-md-6 col-lg-6 mr-5">Start </button>
+  <button id="button-stop" type="button" onclick="stopwatch();" class="btn btn-danger col-xs-6 col-sm-6 col-md-6 col-lg-6 mr-5">Stop </button>
+  
+			  </div>
+			
+			
+			</div>
+		  </div>
+		  <div id="obsanem" class="collapse card border-primary rounded border border-5" style="display:none;">
+			<div class="card-body" >
+		<p class="card-text" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Click on the Flow Control Device and then Anemometer traversing button</p>
+	   
+		
+		</div>
+	  </div>
+			<div  id="measure" class=" card border-primary rounded" style="display: none;">
+			  <div class="card-body" >
+				<h4 class="card-title">Measured Data </h4>
+				
+				<div class="form-group row">
+				  <!-- Time-->
+				  <label for="time1" class=" col-xs-5 col-md-5 col-sm-5 col-lg-5" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Time</label>
+				  <input type="number" class="form-control col-xs-3 col-md-3 col-sm-3 col-lg-3" id="timev" >
+				  <label for="timeunit" class="col-xs-4 col-md-4 col-sm-4 col-lg-4" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">\(sec\)</label>
+				  <!--  Air velocity-->
+				  <label for="airv" class=" col-xs-5 col-md-5 col-sm-5 col-lg-5" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Air Velocity </label>
+				  <input type="number" class="form-control col-xs-3 col-md-3 col-sm-3 col-lg-3" id="airvel" readonly>
+				  <label for="airvunit" class=" col-xs-4 col-md-4 col-sm-4 col-lg-4" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">\(m/sec\)</label>
+				  <!-- Tw Temp -->
+				  <label for="temp" class=" col-xs-5 col-md-5 col-sm-5 col-lg-5" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Tw Temperature</label>
+				  <input type="number" class="form-control col-xs-3 col-md-3 col-sm-3 col-lg-3" id="temptw" readonly>
+				  <label for="tempunit" class=" col-xs-4 col-md-4 col-sm-4 col-lg-4" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">\(cen\)</label>
+				  
+				  </div>
+				  <!-- WKCP-->
+				  <button type="button" id="calwkcp" onclick="calculatewkcp();" class="btn btn-warning col-xs-5 col-md-5 col-sm-5 col-lg-5">Calculate</button>
+				
+				  <div class="form-group row">  <label for="wkcp" class=" col-xs-5 col-md-5 col-sm-5 col-lg-5" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Wet Kata Cooling power</label>
+				  <input type="number" class="form-control col-xs-3 col-md-3 col-sm-3 col-lg-3" id="wkcp" readonly >
+				  <label for="wkcpunit" class="col-xs-4 col-md-4 col-sm-4 col-lg-4" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">\(W/m^2\)</label>
+			   
+  
+				</div>
+				<button type="button" id="obbtn" class="btn btn-primary  col-xs-6 col-sm-6 col-md-6 col-lg-6" onclick="addresult();">Add Result to Observation Table</button>
+				</div>
+				</div>
+				<div id="obvtable6" class="card border-primary rounded" style="display: none;">
+				  <div class="card-body" >
+				<h4 class="card-title">Observation Table</h4>
+				
+				<div class="table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
+				<table class="table table-bordered table-hover" id="obtable6">
+				  <thead>
+					<tr class="table-primary">
+					  <th>Time</th>
+					  <th>Air Velocity </th>
+					  <th>Tw Temperature</th>
+					  <th>Wet Kata Cooling power</th>
+					   
+  
+  
+					</tr>
+				  </thead>
+				  <tbody>
+				   
+				  </tbody>
+				</table>
+				
+  
+				</div>
+			  </div>
+			</div>
+		  
+		<!--/div>
+  
+  
+	  </div-->
+	  </div>
+  </div>
+  </div>
+  </div><!--container-wrapper ends-->
+  
+  <!-- modal for better view-->
+  <div class="modal fade" id="rotatephone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content" style="background-color: rgb(250, 255, 224);">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">For better view in mobile phone</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  Select auto-rotate OR
+		  Select Desktop site 
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-primary col-xs-3 col-sm-3 col-md-3 col-lg-3" data-dismiss="modal" onclick="showpanel();" >OK</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+  <!---->
+  
+  <!-- check no of obs-->
+  <div class="modal fade" id="checkobsn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content" style="background-color: rgb(250, 255, 224);">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <div id="alertmsg"></div>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-primary col-xs-3 col-sm-3 col-md-3 col-lg-3" data-dismiss="modal" onclick="alertmsg();" >OK</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+  <!---->
+  
+  <!-- check table obs no -->
+  <div class="modal fade" id="obtblnum" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content" style="background-color: rgb(250, 255, 224);">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <div id="alertmsgob"></div>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-primary col-xs-3 col-sm-3 col-md-3 col-lg-3" data-dismiss="modal" onclick="alertmsgob();" >OK</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+  <!---->
+  
+  
+  <!-- modal for change pressure-->
+  
+  
+  
+  
+  
+  <!---->
+  
+  
+  
+  <!-- footer-->
+  
+  <footer class="mt-auto" style="background-color: rgb(168, 222, 253);">
+	<p class="justify-content-center" style="color:black;">© 2022 Copyright, Indian Institute of Technology Kharagpur,
+	  <a  style="color: rgb(50, 3, 180); text-decoration: underline;"> Virtual Lab </a></p>
+  </footer>
+  
+  <!-- footer-->
+  
+  
+  
+  
+  <script>
+	
+  $(document).ready(function(){
+	$('[data-toggle="tooltip"]').tooltip();   
+  });
+  
+  /* duct set up  */
+  var c = document.getElementById("myCanvas");
+	  var ctx = c.getContext("2d");
+	  ctx.strokeStyle = 'red';
+	  ctx.lineWidth = 7;
+	  ctx.beginPath();
+	  ctx.moveTo(0, 130); /*  0-130*/
+	  ctx.lineTo(0, 180);
+	  ctx.stroke();
+  
+  
+	  var c1 = document.getElementById("myCanvas1");
+	  var ctx = c1.getContext("2d");
+	  ctx.strokeStyle = 'red';
+	  ctx.lineWidth = 7;
+	  ctx.beginPath();
+	  ctx.moveTo(0, 0); /*  0-130*/
+	  ctx.lineTo(0, 180);
+	  ctx.stroke();
+  
+  
+  /* temp */
+	  var c2 = document.getElementById("myCanvas2");
+	  var ctx = c2.getContext("2d");
+	  ctx.strokeStyle = 'grey';
+	  ctx.lineWidth = 5;
+	  ctx.beginPath();
+	  ctx.moveTo(0, 135); /*  135-0*/
+	  ctx.lineTo(0, 180);
+	  ctx.stroke();
+  
+  
+	/* Initiate Magnify Function
+	with the id of the image, and the strength of the magnifier glass:*/
+   // magnify("scale", 3);
+   
+  
+  
+  
+	let [milliseconds,seconds,minutes,hours] = [0,0,0,0];
+	let timerRef = document.querySelector('.timerDisplay');
+	let int = null;
+	
+	document.getElementById('button-start').addEventListener('click', ()=>{
+		if(int!==null){
+			clearInterval(int);
+		}
+		int = setInterval(displayTimer,10);
+	});
+	
+	document.getElementById('button-stop').addEventListener('click', ()=>{
+		clearInterval(int);
+	});
+	
+	
+	
+	function displayTimer(){
+	  milliseconds+=10;
+		if(milliseconds == 1000){
+			milliseconds = 0;
+			seconds++;
+			if(seconds == 60){
+				seconds = 0;
+				minutes++;
+				if(minutes == 60){
+					minutes = 0;
+					hours++;
+				}
+			}
+		}
+		let h = hours < 10 ? "0" + hours : hours;
+		let m = minutes < 10 ? "0" + minutes : minutes;
+		let s = seconds < 10 ? "0" + seconds : seconds;
+		let ms = milliseconds < 10 ? "00" + milliseconds : milliseconds < 100 ? "0" + milliseconds : milliseconds;
+		//let milisec = ms.substr(0,3);
+	
+		timerRef.innerHTML = ` ${h} : ${m} : ${s} : ${ms} `;  //` ${h} : ${m} : ${s} : ${ms}`;
+	}
+	
+	
+		</script>
+<script src="../assets/js/iframeResize.js"></script></body>
+</html>
